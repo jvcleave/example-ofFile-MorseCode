@@ -22,14 +22,11 @@ void testApp::setup(){
 	while (!buffer.isLastLine()) 
 	{
 		string line = buffer.getNextLine();
-		vector<string> words = ofSplitString(line, ",", false, true);
-		for (int i=0; i<words.size(); i++) 
-		{
-			MorseCodeSymbol symbol;
-			symbol.character = words[0];
-			symbol.code = words[1];
-			morseCodeSymbols.push_back(symbol);
-		}
+		vector<string> words = ofSplitString(line, ",", true, true);
+		MorseCodeSymbol symbol;
+		symbol.character = words[0];
+		symbol.code = words[1];
+		morseCodeSymbols.push_back(symbol);
 	}
 	player.setup();
 }
@@ -61,7 +58,6 @@ void testApp::keyPressed(int key){
 		{
 			currentSymbol = morseCodeSymbols[i];
 			player.playCode(currentSymbol.code);
-			return;
 		}
 		
 	}
