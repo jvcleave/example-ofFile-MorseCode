@@ -1,0 +1,12 @@
+DESCRIPTION:
+Example of reading a comma delimited file using ofFile/ofBuffer
+
+USAGE:
+Press a key (A-Z, 0-9) to play the Morse code equivalent
+
+REQUIREMENTS:
+openFrameworks 007
+
+TESTED WITH:
+Xcode 3.2.6
+Mac OS X 10.6.8
