@@ -1,5 +1,5 @@
 DESCRIPTION:
-Example of reading a comma delimited file using ofFile/ofBuffer
+Example of reading a comma delimited file (.csv) using ofFile/ofBuffer
 
 USAGE:
 Press a key (A-Z, 0-9) to play the Morse code equivalent
@@ -10,3 +10,6 @@ openFrameworks 007
 TESTED WITH:
 Xcode 3.2.6
 Mac OS X 10.6.8
+
+MISC:
+Data provided (lots of goodies there) by http://introcs.cs.princeton.edu/java/data/
