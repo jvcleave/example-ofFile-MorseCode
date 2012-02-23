@@ -1,51 +1,38 @@
 /*
  *  MorseCodePlayer.cpp
- *  example-ofFile
  *
  *  Created by Jason Van Cleave on 2/22/12.
- *  Copyright 2012 __MyCompanyName__. All rights reserved.
  *
  */
 
 #include "MorseCodePlayer.h"
 
-int currentSoundIndex;
 
-vector<char> codes;
-string currentCode;
-MorseCodePlayer::MorseCodePlayer()
-{
+MorseCodePlayer::MorseCodePlayer(){
 	currentSoundIndex = 0;
 	isReady = false;
-		
 }
 
-void MorseCodePlayer::setup()
-{
+void MorseCodePlayer::setup(){
 	dotPlayer.loadSound("dot.wav", false);
 	dashPlayer.loadSound("dash.wav", false);
-	
-	cout << "dotPlayer duration: " << dotPlayer.length/dotPlayer.internalFreq << endl;
-	cout << "dashPlayer duration: " << dashPlayer.length/dashPlayer.internalFreq << endl;
+	ofLogVerbose("dotPlayer duration: " + ofToString(dotPlayer.length/dotPlayer.internalFreq));
+	ofLogVerbose("dashPlayer duration: " + ofToString(dashPlayer.length/dashPlayer.internalFreq));
 	isReady = true;
 }
 
-void MorseCodePlayer::update()
-{
+void MorseCodePlayer::update(){
 	if (!dotPlayer.getIsPlaying() && !dashPlayer.getIsPlaying()) {
-		if (codes.size()>0) 
-		{
-			currentCode = codes[0];
+		if (codes.size()>0){
 			
+			currentCode = codes[0];
 			codes.erase(codes.begin());
-			if (currentCode == ".")
-			{
+			
+			if (currentCode == "."){
 				dotPlayer.play();
 			}
-			if (currentCode == "-")
-			{
+			if (currentCode == "-"){
 				dashPlayer.play();
-				
 			}
 		}
 	}
@@ -53,12 +40,10 @@ void MorseCodePlayer::update()
 	
 }
 
-void MorseCodePlayer::playCode(string morseCode)
-{
+void MorseCodePlayer::playCode(string morseCode){
 	isReady = false;
 	codes.clear();
-	for (int i =0; i<morseCode.size(); i++) 
-	{
+	for (int i =0; i<morseCode.size(); i++){
 		codes.push_back(morseCode[i]);		
 	}
 	currentSoundIndex = 0;

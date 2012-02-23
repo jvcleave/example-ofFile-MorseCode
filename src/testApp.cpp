@@ -1,39 +1,53 @@
 #include "testApp.h"
 
 
-
 //--------------------------------------------------------------
 void testApp::setup(){
 	
 	currentIndex = 0;
 
+	//Path to the comma delimited file
 	string filePath = "morse.csv";
+	
+	//Use a ofTrueTypeFont for scalable text
 	font.loadFont("frabk.ttf", 122);
 	
 	//Load file placed in bin/data
-	ofFile file = ofFile(filePath);
-	if(!file.exists())
-	{
-		ofLogError(filePath + " is missing");
+	ofFile file(filePath);
+	
+	if(!file.exists()){
+		ofLogError("The file " + filePath + " is missing");
 	}
 	
 	ofBuffer buffer(file);
 	
-	while (!buffer.isLastLine()) 
-	{
+	//Read file line by line
+	while (!buffer.isLastLine()) {
 		string line = buffer.getNextLine();
-		vector<string> words = ofSplitString(line, ",", true, true);
+		
+		//Split line into strings
+		vector<string> words = ofSplitString(line, ",");
+		
+		//Store strings into a custom container
 		MorseCodeSymbol symbol;
 		symbol.character = words[0];
 		symbol.code = words[1];
+		
+		//Save MorseCodeSymbols for later
 		morseCodeSymbols.push_back(symbol);
+		
+		//Debug output
+		ofLogVerbose("symbol.character: " + symbol.character);
+		ofLogVerbose("symbol.code: " + symbol.code);
 	}
+	
+	//Load our Morse code sounds
 	player.setup();
 }
 
 //--------------------------------------------------------------
-void testApp::update()
-{
+void testApp::update(){
+	//Update our MorseCodePlayer with the app
 	player.update();
 
 }
@@ -41,21 +55,23 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw(){
 	
-	string output = currentSymbol.character + "\n" + currentSymbol.code;
-	font.drawString(output, (ofGetWidth() - font.stringWidth(output))/2, ofGetHeight()/2);
-
+	string line1 = currentSymbol.character;
+	string line2 = currentSymbol.code;
+	font.drawString(line1, (ofGetWidth() - font.stringWidth(line1))/2, ofGetHeight()/2);
+	font.drawString(line2, (ofGetWidth() - font.stringWidth(line2))/2, ofGetHeight()/2+font.stringHeight(line1));
+	
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 	
+	//Create a comparable string from an int
 	string myKey;
 	myKey = (char) key;
+	myKey = ofToUpper(myKey);
 	
-	for (int i=0; i<morseCodeSymbols.size(); i++)
-	{
-		if (morseCodeSymbols[i].character == ofToUpper(myKey))
-		{
+	for (int i=0; i<morseCodeSymbols.size(); i++) {
+		if (morseCodeSymbols[i].character == myKey){
 			currentSymbol = morseCodeSymbols[i];
 			player.playCode(currentSymbol.code);
 		}

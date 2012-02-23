@@ -1,6 +1,5 @@
 /*
  *  MorseCodePlayer.h
- *  example-ofFile
  *
  *  Created by Jason Van Cleave on 2/22/12.
  *
@@ -21,7 +20,15 @@ public:
 	void update();
 	void playCode(string morseCode);
 	
+	//void playFromKey(int key);
 	ofFmodSoundPlayer dotPlayer;
 	ofFmodSoundPlayer dashPlayer;
+	
+	int currentSoundIndex;
+	
+	vector<char> codes;
+	string currentCode;
+	
+	
 	bool isReady;
 };
