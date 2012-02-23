@@ -55,6 +55,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
 	
+	ofDrawBitmapString("PRESS A KEY (A-Z, 0-9) TO PLAY MORSE CODE", 20, 20);
 	string line1 = currentSymbol.character;
 	string line2 = currentSymbol.code;
 	font.drawString(line1, (ofGetWidth() - font.stringWidth(line1))/2, ofGetHeight()/2);

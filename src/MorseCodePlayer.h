@@ -20,7 +20,7 @@ public:
 	void update();
 	void playCode(string morseCode);
 	
-	//void playFromKey(int key);
+	
 	ofFmodSoundPlayer dotPlayer;
 	ofFmodSoundPlayer dashPlayer;
 	
@@ -28,7 +28,6 @@ public:
 	
 	vector<char> codes;
 	string currentCode;
-	
 	
 	bool isReady;
 };
